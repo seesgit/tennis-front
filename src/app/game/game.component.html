@@ -1,0 +1,88 @@
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Player One</th>
+      <th>Player Two</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr >
+      <td>
+        <form [formGroup]="playerOneForm" (ngSubmit)="onSubmitFormPlayerOne()">
+          <div class="p-fluid">
+            <div class="p-field">
+              <label for="firstname1">Firstname</label>
+              <input id="firstname1" type="text" formControlName="firstname1" pInputText>
+            </div>
+            <div class="p-field">
+              <label for="lastname1">Lastname</label>
+              <input id="lastname1" type="text" formControlName="lastname1" pInputText>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </td>
+      <td>
+        <form [formGroup]="playerTwoForm" (ngSubmit)="onSubmitFormPlayerTwo()">
+          <div class="p-fluid">
+            <div class="p-field">
+              <label for="firstname2">Firstname</label>
+              <input id="firstname2" type="text" formControlName="firstname2" pInputText>
+            </div>
+            <div class="p-field">
+              <label for="lastname2">Lastname</label>
+              <input id="lastname2" type="text" formControlName="lastname2" pInputText>
+            </div>
+          </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <p-card>
+    <p-table [value]="players">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Name</th>
+          <th>Score</th>
+          <th>Action</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-player>
+        <tr>
+          <td>{{player.name}} {{player.firstName}}</td>
+          <td>{{player.match.score}}</td>
+          <td>
+            <button pButton type="button" class="p-button-raised p-button-rounded" (click)="score(player.id)">point
+            </button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-card>
+
+  <p-card>
+    <p-table [value]="players">
+      <ng-template pTemplate="header" >
+        <tr>
+          <th>Name</th>
+          <th *ngFor="let child of players[0].match.sets; let index=index">
+            Set {{index+1}}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-player>
+        <tr>
+          <td>{{player.name}} {{player.firstName}}</td>
+          <td *ngFor="let set of player.match.sets">{{set.game}}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-card>
+</div>
+
+
+<p-toast></p-toast>
